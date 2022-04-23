@@ -1,0 +1,106 @@
+create database example;
+use example;
+
+create table addresses(
+id int,
+house_no int,
+city varchar(20),
+postalcode varchar(6)
+);
+alter table addresses
+add primary key (id);
+
+create table people(
+id int,
+first_name varchar(20),
+last_name varchar(20),
+address_id int
+);
+alter table people
+add primary key(id);
+describe people;
+
+create table pets(
+id int,
+name varchar(20),
+species varchar(20),
+owner_id int
+);
+
+-- Query to Add a primary key to the table
+alter table <table_name>
+add primary key (column_name);
+describe addresses;
+-- Query to drop the primary key of a table
+alter table table_name
+drop primary key;
+
+alter table addresses
+drop primary key;
+-- Query to see the details of the table
+describe addresses;
+
+
+-- Query to add a foreign key
+alter table <tablename>
+add constraint <constraint>
+foreign key <columnname> references <tablename>(<columnname>);
+
+alter table people
+add constraint fk_addresses
+foreign key (address_id) references addresses(id);
+describe people;
+
+
+
+-- Query to remove a foreign key from a table
+
+alter table <tablename>
+drop foreign key <constraintname>;
+alter table <tablename> drop index <constraintname>;
+
+-- query to show the properties of the table including constraint name
+SHOW CREATE table people;
+
+alter table people
+drop foreign key fk_addresses;
+describe people;
+alter table people 
+drop index fk_addresses;
+-- query to add a unique constraint
+alter table <tablename>
+add constraint <constraintname> unique <columnname>;
+
+describe pets;
+
+alter table pets
+add constraint u_species unique (species);
+
+
+
+-- to remove a unique constraint
+alter table <tablename>
+drop index <constarintname>;
+
+select * from pets;
+
+alter table pets
+add constraint u_species unique(species);
+
+alter table pets
+drop index u_species;
+
+-- query to change the column name
+alter table <tablename> change `old_column_name` `new_column_name`<datatype>;
+describe pets;
+select * from pets;
+
+alter table pets change  `species` `animal_type`varchar(20);
+
+
+alter table pets change  `animal_type` `species`varchar(20);
+
+-- query to change a columns data type
+alter table <tablename> modify <columnname><datatype>;
+describe addresses;
+alter table addresses modify city varchar(30);
